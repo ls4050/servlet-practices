@@ -9,8 +9,8 @@ public class EmaillistDaoTest {
 
 	public static void main(String[] args) {
 		// 테스트 케이스 만들기 
-		testInsert();
-		//testFindAll();
+//		testInsert();
+		testFindAll();
 	}
 	
 	private static void testInsert() {
