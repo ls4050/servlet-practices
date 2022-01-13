@@ -11,10 +11,10 @@ import java.util.List;
 import com.poscoict.guestbook01.vo.GuestbookVo;
 
 public class GuestbookDao {
+
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
-
 	public List<GuestbookVo> findAll() {
 		List<GuestbookVo> list = new ArrayList<>();
 		try {
@@ -26,13 +26,13 @@ public class GuestbookDao {
 
 			// 5. sql execute
 			rs = psmt.executeQuery();
-			GuestbookVo vo = new GuestbookVo();
 			while (rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
 				String reg_date = rs.getString(3);
 				String message = rs.getString(4);
 
+				GuestbookVo vo = new GuestbookVo();
 				vo.setNo(no);
 				vo.setName(name);
 				vo.setReg_date(reg_date);
@@ -104,7 +104,6 @@ public class GuestbookDao {
 	}
 	
 	public boolean delete(String no, String password) {
-		
 		boolean result = false;
 		
 		try {

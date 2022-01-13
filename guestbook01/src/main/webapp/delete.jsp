@@ -8,4 +8,6 @@ String password = request.getParameter("password");
 String no = request.getParameter("id");
 
 new GuestbookDao().delete(no, password);
+
+response.sendRedirect("/guestbook01");
 %>

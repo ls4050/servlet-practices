@@ -11,7 +11,6 @@ import java.util.List;
 import com.poscoict.emaillist.vo.EmaillistVo;
 
 public class EmaillistDao {
-	
 	public List<EmaillistVo> findAll() {
 		List<EmaillistVo> result = new ArrayList<EmaillistVo>();
 

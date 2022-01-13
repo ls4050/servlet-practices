@@ -33,17 +33,18 @@ list = new GuestbookDao().findAll();
 	<br>
 
 	<%
+	int index =0;
 	for (GuestbookVo vo : list) {
 	%>
 	<table width=510 border=1>
 		<tr>
-			<td><%=vo.getNo()%></td>
+			<td><%=list.size() - index++%></td>
 			<td><%=vo.getName()%></td>
 			<td><%=vo.getReg_date()%></td>
 			<td><a href="/guestbook01/deleteform.jsp?no=<%=vo.getNo()%>">삭제</a></td>
 		</tr>
 		<tr>
-			<td colspan=4>안녕하세요</td>
+			<td colspan=4><%=vo.getMessage().replaceAll("\n", "<br>") %></td>
 		</tr>
 	</table>
 	<%
