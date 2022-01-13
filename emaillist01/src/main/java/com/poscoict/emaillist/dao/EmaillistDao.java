@@ -19,15 +19,7 @@ public class EmaillistDao {
 		ResultSet rs = null;
 		
 		try {
-			// 1. JDBC 드라이버 로딩
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			// 2. 연결하기
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
-			String user = "webdb";
-			String passwd = "webdb";
-			conn = DriverManager.getConnection(url, user, passwd);
-			
+			conn = getConnection();
 			// 3. SQL 준비
 			String sql = "select no, first_name, last_name, email from emaillist order by no desc";
 			psmt = conn.prepareStatement(sql);
@@ -52,8 +44,6 @@ public class EmaillistDao {
 				result.add(vo);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패 : " + e);
 		} catch (SQLException e) {
 			System.out.println("error : " + e);
 		} finally {
@@ -84,15 +74,7 @@ public class EmaillistDao {
 		ResultSet rs = null;
 		
 		try {
-			// 1. JDBC 드라이버 로딩
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			// 2. 연결하기
-			String user = "webdb";
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
-			String passwd = "webdb";
-			conn = DriverManager.getConnection(url, user, passwd);
-			
+			conn = getConnection();
 			// 3. SQL 준비
 			String sql = "insert into emaillist values(null, ?, ?, ?)";
 			psmt = conn.prepareStatement(sql);
@@ -106,9 +88,7 @@ public class EmaillistDao {
 			// 5. SQL 실행
 			int count = psmt.executeUpdate();
 			result = count == 1;
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패 : " + e);
-		} catch (SQLException e) {
+		}  catch (SQLException e) {
 			System.out.println("error : " + e);
 		} finally {
 			// 자원 정리
@@ -127,5 +107,21 @@ public class EmaillistDao {
 			}
 		}
 		return result;
+	}
+	
+	private Connection getConnection() throws SQLException{ //자기가 처리해야하는 exception을 회피하는 것 위로 던지는 것임 
+		Connection conn =null;
+		try {
+			// 1. JDBC 드라이버 로딩
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// 2. 연결하기
+			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
+			conn = DriverManager.getConnection(url, "webdb", "webdb");
+		} catch(ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패 : " + e);
+		}
+		
+		return conn;
 	}
 }
