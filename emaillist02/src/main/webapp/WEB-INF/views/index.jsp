@@ -1,4 +1,4 @@
-﻿<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.poscoict.emaillist.vo.EmaillistVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.poscoict.emaillist.dao.EmaillistDao"%>
